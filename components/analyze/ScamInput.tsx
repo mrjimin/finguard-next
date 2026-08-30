@@ -20,7 +20,7 @@ export default function ScamInput({
                 <textarea
                     value={value}
                     disabled={loading}
-                    maxLength={3000}
+                    maxLength={1500}
                     onChange={(event) =>
                         onChange(event.target.value)
                     }
