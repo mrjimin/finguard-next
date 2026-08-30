@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import React from "react";
+import { Analytics } from '@vercel/analytics/next';
 
 export const metadata: Metadata = {
     title: "AI 금융 보안 서비스",
@@ -12,7 +13,8 @@ export default function RootLayout({children}: Readonly<{
 }>) {
     return (
         <html lang="ko" data-scroll-behavior="smooth">
-            <body>{children}</body>
+        <body>{children}</body>
+        <Analytics />
         </html>
     );
 }
