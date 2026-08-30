@@ -6,6 +6,8 @@ import { supabase } from "@/lib/supabase";
 
 import type { RiskLevel } from "@/types/analysis";
 
+export const dynamic = "force-dynamic";
+
 interface AnalysisHistory {
     id: string;
     created_at: string;
@@ -58,8 +60,7 @@ export default async function HistoryPage() {
         )
         .order("created_at", {
             ascending: false,
-        })
-        .limit(50);
+        });
 
     const history = (data ?? []) as AnalysisHistory[];
 
@@ -183,7 +184,7 @@ export default async function HistoryPage() {
                                 </div>
 
                                 <span className="history-list__count">
-                                    최근 {totalCount}건
+                                    전체 {totalCount}건
                                 </span>
                             </div>
 
