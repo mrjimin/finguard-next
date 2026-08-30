@@ -116,21 +116,17 @@ export default async function HistoryPage() {
                                     className="history-summary__risk"
                                     key={level}
                                 >
-                                    <div className="history-summary__risk-main">
-                                        <span
-                                            className={`history-summary__dot history-summary__dot--${level.toLowerCase()}`}
-                                        />
+                                    <span
+                                        className={`history-summary__dot history-summary__dot--${level.toLowerCase()}`}
+                                        aria-hidden="true"
+                                    />
 
-                                        <span className="history-summary__risk-label">
-                                            {riskLabels[level]}
-                                        </span>
-                                    </div>
+                                    <span className="history-summary__risk-label">
+                                        {riskLabels[level]}
+                                    </span>
 
                                     <strong>
-                                        {getRiskCount(
-                                            history,
-                                            level
-                                        ).toLocaleString()}
+                                        {getRiskCount(history, level).toLocaleString()}
                                     </strong>
                                 </div>
                             ))}
