@@ -48,10 +48,6 @@ export default function ScamInput({
                         ? "분석 중..."
                         : "AI 분석하기"}
                 </span>
-
-                {!loading && (
-                    <span>→</span>
-                )}
             </button>
         </div>
     );

@@ -32,7 +32,6 @@ export default function StartSection() {
                     className="primary-button"
                 >
                     내 상황 확인하기
-                    <span>→</span>
                 </Link>
 
                 <small className="start-section__notice">

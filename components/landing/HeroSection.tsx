@@ -28,7 +28,6 @@ export default function HeroSection() {
                             className="primary-button"
                         >
                             지금 사용해보기
-                            <span>→</span>
                         </Link>
 
                         <a
