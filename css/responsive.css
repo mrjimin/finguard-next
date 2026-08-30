@@ -1,0 +1,134 @@
+@media (max-width: 900px) {
+    .container {
+        width: calc(100% - 40px);
+    }
+
+    .site-nav {
+        gap: 18px;
+    }
+
+    .check-section__content,
+    .response-section__content {
+        grid-template-columns: 1fr;
+
+        gap: 55px;
+    }
+
+    .analyze-flow {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+
+    .analyze-flow__arrow {
+        transform: rotate(90deg);
+    }
+}
+
+@media (max-width: 700px) {
+    :root {
+        --header-height: 64px;
+    }
+
+    .container {
+        width: calc(100% - 32px);
+    }
+
+    .landing-section {
+        min-height: auto;
+
+        padding: 90px 0;
+    }
+
+    .site-header {
+        height: var(--header-height);
+    }
+
+    .site-nav {
+        display: none;
+    }
+
+    .site-header__action {
+        height: 34px;
+    }
+
+    .hero-section h1 {
+        font-size: 48px;
+    }
+
+    .hero-section__actions {
+        flex-direction: column;
+        align-items: stretch;
+
+        max-width: 240px;
+    }
+
+    .primary-button,
+    .secondary-button {
+        width: 100%;
+    }
+
+    .content,
+    .check-section__content,
+    .response-section__content {
+        margin-top: 50px;
+    }
+
+    .section-title {
+        font-size: 40px;
+    }
+
+    .situation-selector {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .site-footer {
+        padding-top: 55px;
+    }
+
+    .site-footer__top {
+        flex-direction: column;
+        gap: 40px;
+    }
+
+    .site-footer__links {
+        gap: 35px;
+    }
+
+    .site-footer__bottom {
+        flex-direction: column;
+        gap: 8px;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        width: calc(100% - 28px);
+    }
+
+    .hero-section h1 {
+        font-size: 42px;
+    }
+
+    .section-title {
+        font-size: 36px;
+    }
+
+    .site-footer__links {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+
+        width: 100%;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+        transition: none !important;
+    }
+}

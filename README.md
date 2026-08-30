@@ -1,36 +1,201 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+~~# FIN:GUARD
 
-## Getting Started
+> 의심스러운 금융 관련 메시지를 AI로 분석하여
+> 금융사기 위험도를 빠르게 확인할 수 있는 서비스입니다.
 
-First, run the development server:
+---
+
+주요 기능
+- **금융사기 메시지 분석**: 사용자가 받은 금융 관련 메시지를 입력하면 AI를 통해 사기 위험도를 분석합니다.
+- **위험도 분류: 분석** 결과를 낮은 위험, 주의 필요, 높은 위험, 매우 위험의 4단계로 구분합니다.
+- **사기 유형 분석**: 기관사칭, 스미싱, 메신저피싱, 대출사기, 투자사기, 악성앱, 개인정보탈취, 인증정보탈취 등의 유형을 분석합니다.
+- **현재 상황 반영**: 링크 클릭, 앱 설치, 개인정보 제공, 인증정보 제공, 송금 여부 등 사용자의 현재 상황을 분석 결과에 반영합니다.
+- **AI + 규칙 기반** 분석: Gemini AI 분석과 금융사기 위험 규칙을 함께 사용하여 위험도를 판단합니다.
+- **위험 신호 제공**: 분석된 메시지에서 실제로 확인되는 주요 위험 신호를 최대 3개까지 제공합니다.
+- **분석 처리 현황**: 최근 분석 결과를 별도의 목록으로 확인할 수 있습니다.
+- **분석 내용 미저장**: 사용자가 입력한 원본 메시지는 데이터베이스에 저장하지 않습니다.
+- **반응형 UI**: 데스크톱과 모바일 환경에서 사용할 수 있도록 반응형으로 구성했습니다.
+
+---
+
+## 기술 스택
+
+- **Framework**: Next.js (App Router)
+- **Language**: TypeScript
+- **UI**: React
+- **Styling**: CSS
+- **AI**: Google Gemini API
+- **Database**: Supabase
+- **Font**: Pretendard / Noto Sans KR
+- **Deployment**: Vercel
+
+---
+
+## 위험도 기준
+
+FIN:GUARD는 금융사기 위험도를 다음과 같이 4단계로 분류합니다.
+
+| 위험도   | 설명                                                                        |
+|----------|-----------------------------------------------------------------------------|
+| LOW      | 일반적인 서비스 안내 등 명확한 위험 신호가 없는 경우                        |
+| MEDIUM   | 다소 주의가 필요하지만 직접적인 피해 유도 정황이 명확하지 않은 경우         |
+| HIGH     | 기관 사칭, 개인정보·금융정보 입력 요구 등 명확한 사기 정황이 있는 경우      |
+| CRITICAL | OTP·인증번호·비밀번호 요구, 송금 요구, 원격제어 앱 설치 등 매우 위험한 상황 |
+
+실제 피해 행동이 확인된 경우에는 현재 상황을 함께 고려하여 위험도를 보정합니다.
+
+---
+
+## 주요 화면
+
+### 금융사기 분석
+
+사용자가 받은 의심스러운 메시지를 입력하고
+현재 상황을 선택하여 금융사기 위험도를 분석할 수 있습니다.
+
+분석 결과에는 다음과 같은 정보가 표시됩니다.
+
+- 위험도
+- 사기 유형
+- 분석 요약
+- 주요 위험 신호
+
+입력한 메시지의 내용은 분석 결과 화면에만 사용되며
+분석 처리 현황을 위한 데이터베이스에는 원본 메시지를 저장하지 않습니다.
+
+### 현재 상황 선택
+
+메시지를 받은 이후 사용자가 어떤 행동을 했는지 선택할 수 있습니다.
+
+- 아직 아무것도 하지 않았어요
+- 의심스러운 링크를 클릭했어요
+- 의심스러운 앱을 설치했어요
+- 개인정보 또는 금융정보를 제공했어요
+- 인증번호 또는 비밀번호를 제공했어요
+- 이미 돈을 송금했어요
+
+현재 상황은 AI 분석과 최종 위험도 판단에 함께 사용됩니다.
+
+### 처리 현황
+
+최근 금융사기 분석 처리 결과를 목록으로 확인할 수 있습니다.
+
+| 분석 시각   | 위험도    | 사기 유형    |
+|-------------|-----------|--------------|
+| 08 30 14:32 | 매우 위험 | 인증정보탈취 |
+| 08 30 14:18 | 높은 위험 | 스미싱       |
+| 08 30 13:51 | 주의 필요 | 스미싱       |
+| 08 30 13:20 | 낮은 위험 | 기타         |
+
+처리 현황에는 분석 시각, 위험도, 사기 유형, 현재 상황 등의 정보만 저장됩니다.
+사용자가 입력한 원본 메시지는 저장하지 않습니다.
+
+자세한 예시은 [risk-test-cases.md](./risk-test-cases.md)에서 확인할 수 있습니다.
+
+## 데이터 저장
+
+분석 처리 현황을 제공하기 위해 Supabase를 사용합니다.
+
+저장되는 데이터는 다음과 같습니다.
+
+- `id`
+- `situation`
+- `risk_level`
+- `scam_type`
+- `created_at`
+
+원본 메시지와 분석에 사용된 개인정보는 데이터베이스에 저장하지 않습니다.
+
+---
+
+## AI 분석
+
+FIN:GUARD는 Google Gemini API를 사용하여
+입력된 메시지의 전체적인 문맥을 분석합니다.
+
+단순히 특정 키워드가 포함되어 있는지를 확인하는 것이 아니라
+메시지의 행동 요구 여부와 부정 표현, 금융정보 요구 여부 등을 함께 판단합니다.
+
+또한 별도의 규칙 기반 분석을 함께 적용하여
+명확한 금융사기 위험 신호가 발견되는 경우
+AI의 판단과 비교하여 더 높은 위험도를 적용합니다.
+
+---
+
+## 시작하기
+
+### 1. 저장소 클론 및 패키지 설치
+
+```bash
+git clone <repository-url>
+cd <project-directory>
+npm install
+````
+
+### 2. 환경변수 설정
+
+`.env.local` 파일을 생성하고 다음 환경변수를 설정합니다.
+```
+GEMINI_API_KEY=your_gemini_api_key
+
+NEXT_PUBLIC_SUPABASE_URL=your_supabase_url
+NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY=your_supabase_publishable_key
+```
+
+### 3. Supabase 테이블 생성
+
+Supabase SQL Editor에서 다음과 같은 `analysis_history` 테이블을 생성합니다.
+
+```sql
+create table public.analysis_history (
+  id uuid primary key default gen_random_uuid(),
+  situation text not null,
+  risk_level text not null,
+  scam_type text not null,
+  created_at timestamptz not null default now()
+);
+
+create index analysis_history_created_at_idx
+on public.analysis_history (created_at desc);
+```
+
+### 4. 개발 서버 실행
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+서버가 실행되면 브라우저에서 아래 주소로 접속합니다.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```text
+http://localhost:3000
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+--- 
 
-## Learn More
+## 보안 및 개인정보
 
-To learn more about Next.js, take a look at the following resources:
+FIN:GUARD는 금융사기 분석을 위해 사용자가 입력한 메시지를 AI 분석 서버로 전달합니다.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+분석 처리 현황을 위해 데이터베이스에 저장되는 정보는
+위험도, 사기 유형, 현재 상황, 분석 시각 등의 메타데이터이며
+사용자가 입력한 원본 메시지는 저장하지 않습니다.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+또한 FIN:GUARD는 사용자에게 OTP, 인증번호, 비밀번호, 계좌 비밀번호 등의
+민감한 인증정보를 요구하지 않습니다.
 
-## Deploy on Vercel
+## 프로젝트 목적
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+금융사기와 스미싱은 일상적인 문자나 전화의 형태로 접근하기 때문에
+사용자가 짧은 시간 안에 위험 여부를 판단하기 어려운 경우가 많습니다.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+FIN:GUARD는 복잡한 금융사기 유형을 사용자가 직접 판단하기보다
+의심스러운 메시지와 현재 상황을 입력하면
+AI와 규칙 기반 분석을 통해 위험도를 빠르게 확인할 수 있도록 제작했습니다.
+
+특히 단순히 특정 단어를 탐지하는 방식에서 벗어나
+메시지의 전체적인 문맥과 실제 행동 요구 여부를 함께 분석하는 것을 목표로 합니다.
+
+---
+
+© 2026 FIN:GUARD · All rights reserved.

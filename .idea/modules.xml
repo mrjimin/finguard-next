@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/finance-ai.iml" filepath="$PROJECT_DIR$/.idea/finance-ai.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/finguard-next.iml" filepath="$PROJECT_DIR$/.idea/finguard-next.iml" />
     </modules>
   </component>
 </project>
