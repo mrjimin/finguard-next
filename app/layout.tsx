@@ -14,9 +14,11 @@ export default function RootLayout({children}: Readonly<{
 }>) {
     return (
         <html lang="ko" data-scroll-behavior="smooth">
-        <body>{children}</body>
-        <Analytics />
-        <SpeedInsights />
+        <body>
+            {children}
+            <Analytics />
+            <SpeedInsights />
+        </body>
         </html>
     );
 }
