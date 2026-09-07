@@ -84,8 +84,6 @@ export default function AnalyzePage() {
 
     return (
         <>
-            <Header />
-
             <main className="container analysis-page">
                 {!analysis && (
                     <>
@@ -172,8 +170,6 @@ export default function AnalyzePage() {
                     />
                 )}
             </main>
-
-            <Footer />
         </>
     );
 }

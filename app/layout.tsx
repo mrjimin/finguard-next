@@ -3,6 +3,8 @@ import "./globals.css";
 import React from "react";
 import { Analytics } from '@vercel/analytics/next';
 import { SpeedInsights } from '@vercel/speed-insights/next';
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
 
 export const metadata: Metadata = {
     title: "AI 금융 보안 서비스",
@@ -13,10 +15,17 @@ export default function RootLayout({children}: Readonly<{
     children: React.ReactNode;
 }>) {
     return (
-        <html lang="ko" data-scroll-behavior="smooth">
-        <body>{children}</body>
-        <Analytics />
-        <SpeedInsights />
+        <html lang="ko">
+            <body>
+                <Header />
+
+                {children}
+
+                <Footer />
+            </body>
+
+            <Analytics />
+            <SpeedInsights />
         </html>
     );
 }

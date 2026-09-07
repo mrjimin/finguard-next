@@ -309,6 +309,133 @@
     margin: 0;
 }
 
+.history-pagination {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    margin-top: 32px;
+}
+
+.history-pagination button {
+    min-width: 72px;
+    padding: 10px 16px;
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-sm);
+    background: var(--color-surface);
+    color: var(--color-text);
+    font-family: var(--font-sans);
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition:
+            background-color var(--transition-fast),
+            border-color var(--transition-fast),
+            opacity var(--transition-fast);
+}
+
+.history-pagination button:hover:not(:disabled) {
+    background: var(--color-primary-soft);
+    border-color: var(--color-line-dark);
+}
+
+.history-pagination button:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+.history-pagination span {
+    min-width: 32px;
+    color: var(--color-text);
+    font-size: 14px;
+    font-weight: 600;
+    text-align: center;
+}
+
+.skeleton {
+    position: relative;
+    overflow: hidden;
+    border-radius: var(--radius-sm);
+    background: var(--color-bg-soft);
+}
+
+.skeleton::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    transform: translateX(-100%);
+    background: linear-gradient(
+            90deg,
+            transparent,
+            rgba(255, 255, 255, 0.55),
+            transparent
+    );
+    animation: skeleton-loading 1.2s infinite;
+}
+
+@keyframes skeleton-loading {
+    100% {
+        transform: translateX(100%);
+    }
+}
+
+.skeleton--label {
+    width: 130px;
+    height: 14px;
+}
+
+.skeleton--number {
+    width: 150px;
+    height: 48px;
+    margin-top: 14px;
+}
+
+.skeleton--text {
+    width: 130px;
+    height: 14px;
+    margin-top: 12px;
+}
+
+.skeleton--dot {
+    width: 10px;
+    height: 10px;
+}
+
+.skeleton--risk-label {
+    width: 70px;
+    height: 14px;
+}
+
+.skeleton--risk-number {
+    width: 40px;
+    height: 20px;
+}
+
+.skeleton--eyebrow {
+    width: 120px;
+    height: 12px;
+}
+
+.skeleton--title {
+    width: 120px;
+    height: 20px;
+    margin-top: 8px;
+}
+
+.skeleton--date {
+    width: 90px;
+    height: 16px;
+}
+
+.skeleton--badge {
+    width: 70px;
+    height: 28px;
+}
+
+.skeleton--type {
+    width: 120px;
+    height: 18px;
+}
 
 /* =========================================================
    Responsive
