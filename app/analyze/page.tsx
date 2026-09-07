@@ -2,8 +2,6 @@
 
 import { useState } from "react";
 
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
 import ScamInput from "@/components/analyze/ScamInput";
 import SituationSelector from "@/components/analyze/SituationSelector";
 import AnalysisResult from "@/components/analyze/AnalysisResult";
